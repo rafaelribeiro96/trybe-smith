@@ -1,6 +1,6 @@
 import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import connection from './connection';
-import { User } from '../Interfaces/index';
+import { Product } from '../Interfaces/index';
 
 const getAllProducts = async () => {
   const [data] = await connection.execute<RowDataPacket[]>(
@@ -9,7 +9,7 @@ const getAllProducts = async () => {
   return data;
 };
 
-async function createProduct(product: User): Promise<number> {
+async function createProduct(product: Product): Promise<number> {
   const [{ insertId }] = await connection.execute<ResultSetHeader>(
     'INSERT INTO Trybesmith.products (name, amount) VALUE (?, ?)',
     [...Object.values(product)],

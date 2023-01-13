@@ -10,3 +10,9 @@ export interface Response {
   type: number | null;
   message: string | unknown;
 }
+
+export interface Product {
+  id?: number;
+  name: string;
+  amount: string;
+}
