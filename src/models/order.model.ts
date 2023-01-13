@@ -4,11 +4,11 @@ import connection from './connection';
 
 async function getOrders(): Promise<Order[]> {
   const [result] = await connection.execute<RowDataPacket[]>(
-    `SELECT orders.id, orders.user_id AS userId, JSON_ARRAYAGG(products.id) AS productsIds
-      FROM Trybesmith.orders AS orders 
-      INNER JOIN Trybesmith.products AS products 
-      ON products.order_id = orders.id 
-      GROUP BY orders.id;`,
+    `SELECT o.id, o.user_id AS userId, JSON_ARRAYAGG(p.id) AS productsIds
+      FROM Trybesmith.orders o
+      INNER JOIN Trybesmith.products p
+      ON o.id = p.order_id
+      GROUP BY o.id`,
   );
   return result as Order[];
 }
